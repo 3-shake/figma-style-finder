@@ -1,0 +1,43 @@
+{
+  "name": "@qs-f/fkit",
+  "version": "0.1.0",
+  "main": "dist/index.html",
+  "repository": "git@github.com:Qs-F/fkit.git",
+  "author": "Qs-F <qsf@de-liker.com>",
+  "private": true,
+  "scripts": {
+    "dev:ui": "vite build --config vite.ui.config.ts --mode=development",
+    "dev:code": "vite build --config vite.code.config.ts --mode=development",
+    "dev": "run-p dev:**",
+    "clean": "rimraf dist/*",
+    "prebuild": "run-s clean",
+    "build:ui": "vite build --config vite.ui.config.ts --mode=production",
+    "build:code": "vite build --config vite.code.config.ts --mode production",
+    "build": "run-p build:**",
+    "lint:eslint": "eslint --ext .ts,.tsx ./src",
+    "lint:tsc": "tsc",
+    "lint": "run-p lint:**",
+    "fmt": "eslint --ext .ts,.tsx --fix . ./src",
+    "test": "run-p lint"
+  },
+  "inline": true,
+  "devDependencies": {
+    "@de-liker/drts": "0.1.4",
+    "@figma/plugin-typings": "1.42.1",
+    "@types/node": "16.11.25",
+    "@types/react": "17.0.39",
+    "@types/react-dom": "17.0.11",
+    "@types/react-router-dom": "5.3.3",
+    "eslint": "8.9.0",
+    "npm-run-all": "4.1.5",
+    "rimraf": "3.0.2",
+    "typescript": "4.5.5",
+    "vite": "2.8.4",
+    "vite-plugin-singlefile": "0.6.3"
+  },
+  "dependencies": {
+    "@emotion/react": "11.8.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  }
+}
