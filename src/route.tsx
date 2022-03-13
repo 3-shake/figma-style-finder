@@ -1,6 +1,12 @@
 import { render } from 'react-dom'
 import { App } from '/app'
+import { EventProvider } from '/hooks/event'
 
 const root = document.getElementById('app')
 
-render(<App />, root)
+render(
+    <EventProvider>
+      <App />
+    </EventProvider>,
+    root,
+)
