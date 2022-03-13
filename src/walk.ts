@@ -1,6 +1,6 @@
 export const walk = async <StackNode>(
-  root: SceneNode,
-  f: (node: SceneNode, stack?: StackNode[]) => boolean | Promise<boolean>,
+  root: BaseNode,
+  f: (node: BaseNode, stack?: StackNode[]) => boolean | Promise<boolean>,
   stack?: StackNode[]
 ) => {
   if (!(await f(root, stack))) {
