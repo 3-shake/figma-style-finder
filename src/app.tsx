@@ -1,29 +1,33 @@
-import { Fragment, useRef, useState } from 'react'
+import { } from 'react'
+import { Styles } from '/communication'
+import { useEvent } from '/hooks/event'
 
 export const App = () => {
-  const textbox = useRef<HTMLInputElement>(null)
-  const [err, setErr] = useState<string>('')
-  const handler = () => {
-    try {
-      parent.postMessage(
-          {
-            pluginMessage: {
-              type: 'create-rectangles',
-              count: parseInt(textbox.current?.value || '0', 10),
-            },
-          },
-          '*'
-      )
-    } catch (e) {
-      setErr((e as object).toString())
-    }
+  const { event } = useEvent()
+  const styles = event?.data?.pluginMessage as Styles | undefined
+  if (!styles) {
+    return <p>Loading...</p>
   }
+
+  console.log('ui', styles)
+
   return (
-    <Fragment>
-      <h2>hello</h2>
-      <input type="number" ref={textbox} />
-      <button onClick={handler}>Insert</button>
-      <p>{err}</p>
-    </Fragment>
+    <ul>
+      {
+        Object.entries(styles.color).map(([key, colors]) => (
+          <li key={key}>
+            <h2>{key}</h2>
+            {
+              colors.map((v, id) => (
+                <div key={id}>
+                  <p>Page: { v.page.name }</p>
+                  <p>Node: { v.node.name }</p>
+                </div>
+              ))
+            }
+          </li>
+        ))
+      }
+    </ul>
   )
 }
