@@ -18,8 +18,9 @@ export interface StylesEvent extends Event {
   type: 'styles',
   data: Styles,
   appendix: {
-    pages: Array<Pick<PageNode, 'id' | 'name'>>,
-    nodes: Array<Pick<SceneNode, 'id' | 'name'>>,
+    pages: Record<string, Pick<PageNode, 'id' | 'name'>>,
+    nodes: Record<string, Pick<SceneNode, 'id' | 'name'>>,
+    styles: Record<string, Pick<BaseStyle, 'id' | 'name'>>,
   },
 }
 
