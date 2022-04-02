@@ -17,7 +17,7 @@
     "lint:eslint": "eslint --ext .ts,.tsx ./src",
     "lint:tsc": "tsc",
     "lint": "run-p lint:**",
-    "fmt": "eslint --ext .ts,.tsx --fix . ./src",
+    "fmt": "eslint --ext .ts,.tsx --fix ./src",
     "test": "run-p lint"
   },
   "inline": true,
