@@ -16,7 +16,9 @@ export const App = () => {
       {
         Object.entries(styles.data.color).map(([styleKey, pages]) => (
           <li key={styleKey}>
-            <h2>{styles.appendix.styles?.[styleKey]?.name}</h2>
+            <h2>
+              {styles.appendix.styles?.[styleKey]?.name}
+            </h2>
             {
               Object.entries(pages).map(([page, nodes], index) => (
                 <Fragment key={index}>

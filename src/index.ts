@@ -1,15 +1,15 @@
 import { Styles, StylesEvent } from '/communication'
 import { walk } from '/walk'
 
-type Unit = {
-  page: PageNode
-  node: SceneNode
-}
+// type Unit = {
+//   page: PageNode
+//   node: SceneNode
+// }
 
-export const focus = ({ page, node }: Unit): void => {
-  figma.currentPage = page
-  page.selection = [node]
-}
+// export const focus = ({ page, node }: Unit): void => {
+//   figma.currentPage = page
+//   page.selection = [node]
+// }
 
 // returns array of fille style id
 const fillFinder = (node: SceneNode): string[] => {
