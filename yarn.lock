@@ -1415,7 +1415,7 @@ fastq@^1.6.0:
   dependencies:
     reusify "^1.0.4"
 
-figma-ui-components@^0.0.8:
+figma-ui-components@0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/figma-ui-components/-/figma-ui-components-0.0.8.tgz#258599f4c4d0e843d9ab9843ffab422227b7e624"
   integrity sha512-x3d3UwtBDMbg2lAVy20lKRPzZ0+KvX3ZDrBPBPavEe85b/rU7Ouwt0dQMuIW4WL0g3fKufzz11KifiHgm9mf+Q==
