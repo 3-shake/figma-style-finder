@@ -59,6 +59,7 @@ const getStyles = async (): Promise<StylesEvent> => {
 
 const main = async () => {
   figma.showUI(__html__, { visible: true })
+  figma.ui.resize(480, 640)
   const styles = await getStyles()
   figma.ui.postMessage(styles)
   figma.ui.onmessage = (message) => focus(message)
