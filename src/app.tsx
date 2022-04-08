@@ -1,45 +1,89 @@
-import { Fragment } from 'react'
+import {
+  Disclosure,
+} from 'figma-ui-components'
 import { StylesEvent } from '/communication'
+import { DisclosureItem } from '/components/disclosure'
+import { Text } from '/components/text'
 import { useEvent } from '/hooks/event'
+import { TargetIcon } from '/icons/target'
 
 export const App = () => {
   const { event } = useEvent()
   const styles = event?.data?.pluginMessage as StylesEvent | undefined
   if (!styles) {
-    return <p>Loading...</p>
+    return <Text>Loading...</Text>
   }
 
-  console.log(styles)
-
   return (
-    <ul>
+    <Disclosure>
       {
         Object.entries(styles.data.color).map(([styleKey, pages]) => (
-          <li key={styleKey}>
-            <h2>
-              {styles.appendix.styles?.[styleKey]?.name}
-            </h2>
-            {
-              Object.entries(pages).map(([page, nodes], index) => (
-                <Fragment key={index}>
-                  <div>{
-                    styles.appendix.pages?.[page]?.name
-                  }</div>
-                  {
-                    nodes.map((node, id) => (
-                      <p key={id} onClick={() => {
-                        parent.postMessage({ pluginMessage: 'hello' })
-                      }}>Node: {
-                          styles.appendix.nodes?.[node]?.name
-                        }</p>
-                    ))
-                  }
-                </Fragment>
-              ))
+          <DisclosureItem
+            label={
+              // eslint-disable-next-line max-len
+              `${styles.appendix.styles?.[styleKey]?.name} (${Object.keys(pages).length})`
             }
-          </li>
+            key={styleKey}
+            isSection
+            content={
+              <Disclosure>
+                {
+                  Object.entries(pages).map(([page, nodes], index) => (
+                    <DisclosureItem
+                      label={
+                        // eslint-disable-next-line max-len
+                        `${styles.appendix.pages?.[page]?.name} (${nodes.length})`
+                      }
+                      key={index}
+                      content={
+                        <ul css={{
+                          listStyleType: 'none',
+                          padding: 0,
+                        }}>
+                          {
+                            nodes.map((node, id) => (
+                              <li
+                                key={id}
+                                css={{
+                                  alignItems: 'center',
+                                  display: 'flex',
+                                }}
+                              >
+                                <Text
+                                  css={{
+                                    flexGrow: 1,
+                                  }}
+                                >
+                                  { styles.appendix.nodes?.[node]?.name }
+                                </Text>
+                                <TargetIcon
+                                  css={{
+                                    '&:hover': {
+                                      backgroundColor: 'rgba(0, 0, 0, .06)',
+                                    },
+                                  }}
+                                  onClick={() => {
+                                    parent.postMessage({
+                                      pluginMessage: {
+                                        page,
+                                        node,
+                                      },
+                                    }, '*')
+                                  }}
+                                />
+                              </li>
+                            ))
+                          }
+                        </ul>
+                      }
+                    />
+                  ))
+                }
+              </Disclosure>
+            }
+          />
         ))
       }
-    </ul>
+    </Disclosure>
   )
 }
