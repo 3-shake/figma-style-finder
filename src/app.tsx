@@ -17,7 +17,14 @@ export const App = () => {
   return (
     <Disclosure>
       {
-        Object.entries(styles.data.color).map(([styleKey, pages]) => (
+        Object.entries(styles.data.color).sort((a, b) => {
+          const a_ = styles.appendix.styles[a[0]]?.name || ''
+          const b_ = styles.appendix.styles[b[0]]?.name || ''
+          if (a_ > b_) {
+            return 1
+          }
+          return -1
+        }).map(([styleKey, pages]) => (
           <DisclosureItem
             label={
               // eslint-disable-next-line max-len
