@@ -1,6 +1,4 @@
-import {
-  Disclosure,
-} from 'figma-ui-components'
+import { Disclosure } from 'figma-ui-components'
 import { StylesEvent } from '/communication'
 import { DisclosureItem } from '/components/disclosure'
 import { Text } from '/components/text'
