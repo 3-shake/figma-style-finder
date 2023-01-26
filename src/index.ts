@@ -8,19 +8,33 @@ const focus = (target: { page: string, node: string}): void => {
 }
 
 // returns array of fille style id
-const fillFinder = (node: SceneNode): string[] => {
+const colorFinder = (node: SceneNode): string[] => {
   if (!('fillStyleId' in node)) {
+    return []
+  }
+  if (!('strokeStyleId' in node)) {
     return []
   }
   if (node.fillStyleId === figma.mixed) {
     // TODO: handling text in mixed color
     return []
   }
-  return [node.fillStyleId]
+  return [node.fillStyleId, node.strokeStyleId]
+}
+
+const textFinder = (node: TextNode): string[] => {
+  if (!('textStyleId' in node)) {
+    return []
+  }
+  if (node.textStyleId=== figma.mixed) {
+    // TODO: handling text in mixed color
+    return []
+  }
+  return [node.textStyleId]
 }
 
 const getStyles = async (): Promise<StylesEvent> => {
-  const styles: Styles = { color: {}, text: {} }
+  const styles: Styles = { color: {}, text: {}, effect: {} }
   const ret: StylesEvent = {
     type: 'styles',
     data: styles,
@@ -35,7 +49,7 @@ const getStyles = async (): Promise<StylesEvent> => {
       if (node.type === 'PAGE' || node.type === 'DOCUMENT') {
         return true
       }
-      fillFinder(node).map((style: string) => {
+      colorFinder(node).map((style: string) => {
         if (!style) return
         ret.appendix.pages[page.id] = { id: page.id, name: page.name }
         ret.appendix.nodes[node.id] = { id: node.id, name: node.name }
@@ -51,6 +65,25 @@ const getStyles = async (): Promise<StylesEvent> => {
         }
         (styles.color[style]?.[page.id] || []).push(node.id) // TypeScript Hack
       })
+      if (!(node.type === 'TEXT') ) {
+        return true
+      }
+      textFinder(node).map((style: string) => {
+        if (!style) return
+        ret.appendix.pages[page.id] = { id: page.id, name: page.name }
+        ret.appendix.nodes[node.id] = { id: node.id, name: node.name }
+        const s = figma.getStyleById(style)
+        !ret.appendix.styles[style] && s &&
+          (ret.appendix.styles[style] = { id: s.id, name: s.name })
+        if (!(style in styles.text)) {
+          styles.text[style] = { [page.id]: [node.id] }
+          return
+        }
+        if (!(page.id in (styles.text[style] || {}))) {
+          Object.assign(styles.text[style], { [page.id]: [] })
+        }
+        (styles.text[style]?.[page.id] || []).push(node.id) // TypeScript Hack
+      })
       return true
     })
   }))
@@ -61,6 +94,7 @@ const main = async () => {
   figma.showUI(__html__, { visible: true })
   figma.ui.resize(480, 640)
   const styles = await getStyles()
+  console.log(styles)
   figma.ui.postMessage(styles)
   figma.ui.onmessage = (message) => focus(message)
 }
