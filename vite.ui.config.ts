@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       inlineDynamicImports: true,
       output: {
-        manualChunks: () => 'everything.js', // for viteSingleFile
+        manualChunks: undefined,
       },
     },
     watch: mode === 'production' ? null : {},
