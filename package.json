@@ -1,10 +1,14 @@
 {
-  "name": "@qs-f/fkit",
+  "name": "@3-shake/figma-style-finder",
   "version": "0.1.0",
-  "main": "dist/index.html",
-  "repository": "git@github.com:Qs-F/fkit.git",
-  "author": "Qs-F <qsf@de-liker.com>",
   "private": true,
+  "main": "dist/index.html",
+  "repository": "git@github.com:3-shake/figma-style-finder.git",
+  "author": "Qs-F <qsf@de-liker.com>",
+  "license": "MIT",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "dev:ui": "vite build --config vite.ui.config.ts --mode=development",
     "dev:code": "vite build --config vite.code.config.ts --mode=development",
