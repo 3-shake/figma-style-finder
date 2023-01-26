@@ -383,10 +383,10 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@figma/plugin-typings@1.50.0":
-  version "1.50.0"
-  resolved "https://registry.yarnpkg.com/@figma/plugin-typings/-/plugin-typings-1.50.0.tgz#1bc7de6639ff8a5525ac937c19241e2e4e925e96"
-  integrity sha512-ue1He4XimFEjY7eS7x6tBY6pyMp7zfVOjgStFioqKUxPPIz0gCFLmFUjR5g6fMrYJCqAMP5/Mjwq4Ks0vpe2sA==
+"@figma/plugin-typings@1.58.0":
+  version "1.58.0"
+  resolved "https://registry.yarnpkg.com/@figma/plugin-typings/-/plugin-typings-1.58.0.tgz#88ae0e57e2ac74203d401f2a70e95e93c470e093"
+  integrity sha512-to6hFysqZYACz4VNgaBXflOVS+1pbXGNVcezDmQEMcADDkIZeAZ71Zfqf/B2YDRmU3sM1xX5Q5NkRGhjCuLOLg==
 
 "@humanwhocodes/config-array@^0.11.8":
   version "0.11.8"
