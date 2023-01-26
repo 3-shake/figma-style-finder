@@ -1,4 +1,4 @@
-export type StyleType = 'color' | 'text'
+export type StyleType = 'color' | 'text' | 'effect'
 
 export interface Event {
   type: string,

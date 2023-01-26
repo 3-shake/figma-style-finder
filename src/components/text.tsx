@@ -6,11 +6,12 @@ export const Text: VFC<{
   bold?: boolean,
   children: ReactNode,
   css?: CSSObject
+  onClick?: () => void
 }> = (props) => (
   <Fragment>
     { props.bold ?
-      <Type11PosBold {...props}>{props.children}</Type11PosBold> :
-      <Type11Pos {...props}>{props.children}</Type11Pos>
+    <Type11PosBold {...props} /> :
+    <Type11Pos {...props} />
     }
   </Fragment>
 )
