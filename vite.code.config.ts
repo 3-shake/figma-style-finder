@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       inlineDynamicImports: true,
       output: {
-        manualChunks: () => 'index.js',
+        manualChunks: undefined,
       },
     },
     watch: mode === 'production' ? null : {},
